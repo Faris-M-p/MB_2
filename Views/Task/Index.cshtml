@@ -1,0 +1,146 @@
+
+@model List<MB_2.Models.OutPutTaskList>
+
+<h1>Tasks</h1>
+<button>
+    <a href="/Task/Create">Create Task</a>
+</button>
+
+
+<hr />
+<form method="get" action="/Task/index">
+
+    <input type="text" name="searchname"  placeholder="Search by title..." />
+    
+    <select name="Namesort"> 
+        <option value="">Sort By </option>
+        <option value="ASC">ASC </option>
+        <option value="DESC">DESC</option>
+    </select> 
+
+    <select name="filterstatus">
+        <option value="">All</option>
+        <option value="1">Pending</option>
+        <option value="2">Completed</option>
+        <option value="3">Overdue</option>
+
+    </select>
+     
+    <button type="submit">Apply</button>
+    <a href="/Task/Index">Clear</a>
+    <button type="button" onclick="window.location.href='/Task/index'">
+        Clear All
+    </button>
+
+
+</form>
+
+<h2>Task List</h2>
+
+<table border="2" width="2">
+    <thead >
+        <tr >
+            <th>Slno</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created Date</th>
+            <th>Due Date</th>
+            <th>Completed Date</th>
+            <th>Status</th>
+            <th>FK Employee</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model==null || !Model.Any())
+        {
+            <tr >
+                <td align="center" colspan="18">No data</td>
+            </tr>
+        }
+
+        @foreach (var task in Model)
+        {
+
+
+
+            <tr>
+                <td>@task.FK_Task</td>
+
+                <td>@task.Title</td>
+
+                <td>@task.Description</td>
+                <td>@task.CreatedDate</td>
+                <td>@task.DueDate</td>
+                <td>@task.CompletedDate</td>
+                <td>
+                    @(task.Status == 1 ? "Pending" : task.Status == 2 ? "Completed" : "Overdue")
+                </td>
+                <td>@task.FK_Employee</td>
+
+                <td>
+                    <button>
+                        <a href="/Task/Edit?id=@task.FK_Task">
+                        Edit
+                        </a>
+                    </button>
+                    
+
+                    <form action="/Task/Delete"
+                          method="post"
+                          style="display:inline;">
+
+                        <input type="hidden"
+                               name="FK_Task"
+                               value="@task.FK_Task" />
+
+                        <button type="submit">
+                            Delete
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+<div>
+
+    @if (ViewBag.Page > 1)
+    {
+        <a href="/Task/Index?page=@(ViewBag.Page - 1)">
+            Previous
+        </a>
+    }
+
+    <span> Page @ViewBag.Page </span>
+
+    <a href="/Task/Index?page=@(ViewBag.Page + 1)">
+        Next
+    </a>
+    <select onchange="window.location.href='/Task/Index?page=1&pagesize=' + this.value">
+        <option value="">Select Page Size</option>
+        <option value="2">2</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+</div>
+<style>
+    Table  {
+        width:100%;
+        border: 1px solid black;
+
+    }   
+
+    td,th {
+        width :100px;
+        border: 1px solid red;
+        padding: 8px;
+
+    }
+
+</style>

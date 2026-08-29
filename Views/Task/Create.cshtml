@@ -1,0 +1,45 @@
+
+@model MB_2.Models.InputTaskCreate
+
+<h1>Create Task</h1>
+
+<form action="/Task/Create" method="post">
+
+    <div>
+        <label>Title</label>
+        <input asp-for="Title"/>
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label>Description</label>
+        <input asp-for="Description"  />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label>Employee</label>
+        <select asp-for="FK_Employee">
+            <option value="">Select Employee</option>
+            @if (ViewBag.Employees != null)
+            {
+                @foreach (var emp in (List<MB_2.Models.OutPutEmployeeList>)ViewBag.Employees)
+                {
+                    <option value="@emp.FK_Employee">@emp.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="FK_Employee"></span>
+    </div>
+    <div>
+        <label>Due Date</label>
+        <input asp-for="DueDate" />
+        <span asp-validation-for="DueDate"></span>
+    </div>
+
+    
+    <br />
+    <hr />
+    <button type="submit">Create Task</button>
+
+    <a href="/Task/Index"> Cancel</a>
+
+</form>

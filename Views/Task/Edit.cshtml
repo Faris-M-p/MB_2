@@ -1,0 +1,60 @@
+
+@model MB_2.Models.OutPutTaskList
+
+<h1>Edit Task</h1>
+
+<form action="/Task/Update" method="post">
+
+    <input type="hidden"name="FK_Task" 
+       value="@Model.FK_Task" />
+
+    <div>
+        <label>Title</label>
+        <input type="text" name="Title" value="@Model.Title"required />
+    </div> 
+    <div>
+        <label>Description</label>
+        <input type="text" name="Description" value="@Model.Description" required />
+    </div>
+    <div>
+        <label>Employee</label>
+        <select name="FK_Employee">
+            <option value="">Select Employee</option>
+            @if (ViewBag.Employees != null)
+            {
+                @foreach (var emp in (List<MB_2.Models.OutPutEmployeeList>)ViewBag.Employees)
+                {
+                    if (emp.FK_Employee == Model.FK_Employee)
+                    {
+                        <option value="@emp.FK_Employee" selected>@emp.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@emp.FK_Employee">@emp.Name</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <label>Due Date</label>
+        <input type="date" 
+            name="DueDate" 
+            value="@(Model.DueDate?.ToString("yyyy-MM-dd"))"
+            required />
+    </div>
+    <div>
+        <label>Completed</label>
+        <input asp-for="Completed" type="checkbox" />
+    </div>
+    <br />
+
+    <button type="submit">
+        Update Task
+    </button>
+
+    <a href="/Task/Index">
+        Cancel
+    </a>
+
+</form>

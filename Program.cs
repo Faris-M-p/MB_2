@@ -15,6 +15,7 @@ Options.UseSqlServer(
 )
 );
 builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+builder.Services.AddScoped<ITaskRepository,TaskRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
