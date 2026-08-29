@@ -8,6 +8,31 @@
 
 
 <hr />
+<form method="get" action="/Employee/index">
+
+    <input type="text" name="searchname"  placeholder="Search by name..." />
+    
+    <select name="Namesort"> 
+        <option value="">Sort By </option>
+        <option value="ASC">ASC </option>
+        <option value="DESC">DESC</option>
+    </select> 
+
+    <select name="filteractive">
+        <option value="">All</option>
+        <option value="true">Active</option>
+        <option value="false">DeActive</option>
+
+    </select>
+     
+    <button type="submit">Apply</button>
+    <a href="/Employee/Index">Clear</a>
+    <button type="button" onclick="window.location.href='/Employee/index'">
+        Clear All
+    </button>
+
+
+</form>
 
 <h2>Employee List</h2>
 
@@ -55,9 +80,12 @@
                 <td>@employee.JoinDate</td>
 
                 <td>
-                    <a href="/Employee/Edit?id=@employee.FK_Employee">
+                    <button>
+                        <a href="/Employee/Edit?id=@employee.FK_Employee">
                         Edit
-                    </a>
+                        </a>
+                    </button>
+                    
 
                     <form action="/Employee/Delete"
                           method="post"
@@ -76,8 +104,31 @@
             </tr>
         }
     </tbody>
+    
 </table>
+<div>
 
+    @if (ViewBag.Page > 1)
+    {
+        <a href="/Employee/Index?page=@(ViewBag.Page - 1)">
+            Previous
+        </a>
+    }
+
+    <span> Page @ViewBag.Page </span>
+
+    <a href="/Employee/Index?page=@(ViewBag.Page + 1)">
+        Next
+    </a>
+    <select onchange="window.location.href='/Employee/Index?page=1&pagesize=' + this.value">
+        <option value="">Select Page Size</option>
+        <option value="2">2</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+</div>
 <style>
     Table  {
         width:100%;

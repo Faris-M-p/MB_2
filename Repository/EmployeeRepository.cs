@@ -16,10 +16,36 @@ namespace MB_2.Repository
             }
         }
 
-        public async Task<List<OutPutEmployeeList>> GetAllEmployees()
+        public async Task<List<OutPutEmployeeList>> GetAllEmployees(string searchname = "", string namesort = "", bool? filteractive = null, int page=1, int pagesize=5)
         {
-            var response = await _context.Employee
-                .Where(x=> x.IsDeleted==false)
+            var query= _context.Employee
+                .Where(x => x.IsDeleted == false);
+
+            if (!string.IsNullOrEmpty(searchname))
+            {
+                query = query.Where(x => x.Name.Contains(searchname)|| x.Email.Contains(searchname));
+            }
+            if (!string.IsNullOrEmpty(namesort))
+            {
+                if (namesort == "ASC")
+                {
+                    query = query.OrderBy(x => x.Name);
+
+                }
+                else if (namesort == "DESC")
+                {
+                    query = query.OrderByDescending(x => x.Name);
+
+                }
+            }
+            if (filteractive.HasValue)
+            {
+                query = query.Where(x => x.IsActive == filteractive.Value);
+            }
+            query = query.Skip((page - 1 )* pagesize)
+                .Take(pagesize);
+
+            var response = await query
                 .Select(x => new OutPutEmployeeList
                 {
                     FK_Employee = x.ID_Employee,
@@ -30,6 +56,7 @@ namespace MB_2.Repository
                     Department = x.Department,
                     Designation = x.Designation,
                     JoinDate = x.JoinDate,
+
                 })
                 .ToListAsync();
 
@@ -111,7 +138,7 @@ namespace MB_2.Repository
                 var employee = new Employee
                 {
                     Name = input.Name,
-                    IsActive = input.IsActive,
+                    IsActive = true,
                     Email = input.Email,
                     Phone = input.Phone,
                     Department = input.Department,

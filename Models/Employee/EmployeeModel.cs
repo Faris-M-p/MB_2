@@ -7,7 +7,7 @@ namespace MB_2.Models
     {
         public int FK_Employee { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Department { get; set; }

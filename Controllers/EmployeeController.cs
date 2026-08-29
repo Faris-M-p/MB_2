@@ -15,9 +15,11 @@ namespace MB_2.Controllers
             _employeeRepository = employeeRepository;
         }
         // GET: EmployeeController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchname = "", string namesort = "", bool? filteractive = null,int page=1,int pagesize=5)
         {
-           var responce = await  _employeeRepository.GetAllEmployees();
+           var responce = await  _employeeRepository.GetAllEmployees(searchname, namesort, filteractive,page,pagesize);
+            ViewBag.Page = page;
+            ViewBag.pagesize = pagesize;
             return View(responce);
         }
 

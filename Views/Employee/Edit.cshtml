@@ -10,8 +10,8 @@
 
     <div>
         <label>Name</label>
-        <input type="text" name="Name"value="@Model.Name"required />
-    </div>
+        <input type="text" name="Name" value="@Model.Name"required />
+    </div> 
     <div>
         <label>Email</label>
         <input type="email" name="Email" value="@Model.Email" required />
@@ -30,11 +30,15 @@
     </div>
     <div>
         <label>Join Date</label>
-        <input type="date" name="JoinDate" value="@Model.JoinDate" required />
+        <input type="date" 
+            name="JoinDate" 
+            value="@(Model.JoinDate?.ToString("yyyy-MM-dd"))"
+            required />
     </div>
     <div>
         <label>Is Active</label>
-        <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+        <input asp-for="IsActive" type="checkbox" />
+    </div>
     <br />
 
     <button type="submit">
