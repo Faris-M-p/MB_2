@@ -1,0 +1,49 @@
+﻿
+@model MB_2.Models.OutPutEmployeeList
+
+<h1>Edit Employee</h1>
+
+<form action="/Employee/Update" method="post">
+
+    <input type="hidden"name="FK_Employee" 
+       value="@Model.FK_Employee" />
+
+    <div>
+        <label>Name</label>
+        <input type="text" name="Name"value="@Model.Name"required />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" name="Email" value="@Model.Email" required />
+    </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" name="Phone" value="@Model.Phone" required />
+    </div>
+    <div>
+        <label>Department</label>
+        <input type="text" name="Department" value="@Model.Department" required />
+    </div>
+    <div>
+        <label>Designation</label>
+        <input type="text" name="Designation" value="@Model.Designation" required />
+    </div>
+    <div>
+        <label>Join Date</label>
+        <input type="date" name="JoinDate" value="@Model.JoinDate" required />
+    </div>
+    <div>
+        <label>Is Active</label>
+        <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+    <br />
+
+    <button type="submit">
+        Update Employee
+    </button>
+
+    <a href="/Employee/Index">
+        Cancel
+    </a>
+
+</form>
+

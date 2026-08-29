@@ -1,0 +1,47 @@
+﻿
+@model MB_2.Models.InputEmployeeCreate
+
+<h1>Create Employee</h1>
+
+<form action="/Employee/Create" method="post">
+
+    <div>
+        <label>Name</label>
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="Email"  />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label>Phone</label>
+        <input asp-for="Phone" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label>Department</label>
+        <input asp-for="Department"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label>Designation</label>
+        <input asp-for="Designation" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label>Join Date</label>
+        <input asp-for="JoinDate" />
+        <span asp-validation-for="JoinDate"></span>
+    </div>
+
+    
+    <br />
+    <hr />
+    <button type="submit">Create Employee</button>
+
+    <a href="/Employee/Index"> Cancel</a>
+
+</form>
+
