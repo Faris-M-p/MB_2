@@ -8,5 +8,6 @@ namespace MB_2.Models.Entity
         }
         public DbSet<MB_2.Models.Entity.Employee> Employee { get; set; }
         public DbSet<MB_2.Models.Entity.Task> Task { get; set; }
+        public DbSet<MB_2.Models.Entity.User> Users { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model MB_2.Models.User.InputLoginUser
+
+<h2>Login</h2>
+
+<form action="/User/Login" method="post">
+
+    <div>
+        <input asp-for="Email" placeholder="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input asp-for="Password" type="password" placeholder="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <!-- General error -->
+    <div>
+        <span asp-validation-summary="ModelOnly" class="text-danger"></span>
+    </div>
+
+    <button type="submit">Login</button>
+    @if (ViewBag.Error != null)
+    {
+        <p class="text-danger">aaa @ViewBag.Error</p>
+    }
+</form>
+
+<a href="/User/Register">
+    Don't have an account? Register here.
+</a>

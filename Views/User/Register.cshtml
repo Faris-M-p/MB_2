@@ -1,0 +1,22 @@
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+@model MB_2.Models.User.InputCreateUser;
+<h2>Register</h2>
+<form asp-action="Register" method="post">
+    <label>Name</label><input type="text" asp-for="Name" placeholder="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+   
+    <label>Email</label>
+    <input type="email" asp-for="Email" placeholder="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    <label>Password</label>
+    <input type="password" asp-for="Password" placeholder="Password" />
+   <span asp-validation-for="Password" class="text-danger"></span>
+    <br />
+
+   <button type="submit">Register</button>
+
+
+</form>
+<a href="/User/Login">Already have an account? Login here.</a>

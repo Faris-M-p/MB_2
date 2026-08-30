@@ -1,6 +1,7 @@
 ﻿using MB_2.Models;
 using MB_2.Models.Entity;
 using MB_2.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,12 +42,15 @@ namespace MB_2.Controllers
         }
         // GET: EmployeeController/Create
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(InputEmployeeCreate input)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(input);
             }
+            var name = User.Identity.Name;
             await _employeeRepository.CreateEmployee(input);
 
             return RedirectToAction("Index");
